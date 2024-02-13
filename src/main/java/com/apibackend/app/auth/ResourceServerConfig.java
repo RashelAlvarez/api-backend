@@ -13,7 +13,10 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
         // TODO Auto-generated method stub
-        http.authorizeRequests(requests -> requests.antMatchers(HttpMethod.GET, "/clientes").permitAll()
+		//aca se agrega seguridad a las rutas
+        http.authorizeRequests(requests -> requests.antMatchers(HttpMethod.GET, "/clientes", "/uploads/img/**").permitAll()
+        	/*	.antMatchers(HttpMethod.GET, "/clientes/{id}").hasAnyRole("ADMIN","USER")
+        		.antMatchers(HttpMethod.POST, "/clientes").hasRole("ADMIN")*/
                 .anyRequest().authenticated());
 	}
 
