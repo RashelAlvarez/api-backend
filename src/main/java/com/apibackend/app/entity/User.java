@@ -2,18 +2,18 @@ package com.apibackend.app.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "users")
@@ -34,7 +34,47 @@ public class User implements Serializable {
 	@Column(length = 60)
 	private String password;
 
-	private Boolean isactive;
+	private Boolean enabled;
+	
+	private String nombre;
+	private String apellido;
+	
+	@Column(unique = true)
+	private String email;
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+
+	public String getApellido() {
+		return apellido;
+	}
+
+
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(uniqueConstraints = {@UniqueConstraint(columnNames = {"roles_id", "user_id"})} )
@@ -43,6 +83,8 @@ public class User implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
+
 
 	public void setId(Long id) {
 		this.id = id;
@@ -64,13 +106,15 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Boolean getIsactive() {
-		return isactive;
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setIsactive(Boolean isactive) {
-		this.isactive = isactive;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
+
+
 
 	public List<Role> getRoles() {
 		return roles;
