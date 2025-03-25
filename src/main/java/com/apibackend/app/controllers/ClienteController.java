@@ -38,7 +38,7 @@ import com.apibackend.app.entity.Cliente;
 import com.apibackend.app.services.IClienteService;
 import javax.validation.Valid;
 
-@CrossOrigin(origins = { "http://localhost:4200" }) // sirve para conectar esta aplicacion con Angular
+@CrossOrigin(origins = { "http://localhost:4200", "*" }) // sirve para conectar esta aplicacion con Angular
 @RestController
 public class ClienteController {
 
